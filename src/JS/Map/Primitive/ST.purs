@@ -8,9 +8,12 @@ module JS.Map.Primitive.ST
   , size
   , peek
   , poke
+  , poke_
   , delete
+  , delete_
   ) where
 
+import Prelude
 
 import Control.Monad.ST (ST, Region)
 import Control.Monad.ST.Uncurried (STFn1, STFn2, STFn3, STFn4, runSTFn1, runSTFn2, runSTFn3, runSTFn4)
@@ -44,12 +47,22 @@ foreign import peekImpl :: forall r m k v. STFn4 m k (v -> Maybe v) (Maybe v) r 
 
 -- | Update the value for a key in a mutable map
 poke :: forall r k v. Key k => k -> v -> STMap r k v -> ST r (STMap r k v)
-poke k v m = runSTFn3 pokeImpl m k v
+poke k v m = do
+  runSTFn3 pokeImpl m k v
+  pure m
 
-foreign import pokeImpl :: forall r k v m. STFn3 m k v r m
+poke_ :: forall r k v. Key k => k -> v -> STMap r k v -> ST r Unit
+poke_ k v m = runSTFn3 pokeImpl m k v
+
+foreign import pokeImpl :: forall r k v m. STFn3 m k v r Unit
+
+delete :: forall r k v. Key k => k -> STMap r k v -> ST r (STMap r k v)
+delete k m = do
+  runSTFn2 deleteImpl m k
+  pure m
 
 -- | Remove a key and the corresponding value from a mutable map
-delete :: forall r k v. Key k => k -> STMap r k v -> ST r (STMap r k v)
-delete k m = runSTFn2 deleteImpl m k
+delete_ :: forall r k v. Key k => k -> STMap r k v -> ST r Unit
+delete_ k m = runSTFn2 deleteImpl m k
 
-foreign import deleteImpl :: forall r k m. STFn2 m k r m
+foreign import deleteImpl :: forall r k m. STFn2 m k r Unit

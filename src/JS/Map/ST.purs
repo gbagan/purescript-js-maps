@@ -1,10 +1,12 @@
 module JS.Map.ST
   ( STMap
   , delete
+  , delete_
   , freeze
   , new
   , peek
   , poke
+  , poke_
   , modify
   , run
   , thaw
@@ -38,9 +40,15 @@ peek k (STMap m) = map snd <$> STP.peek (encodeKey k) m
 poke :: forall r k v. EncodeKey k => k -> v -> STMap r k v -> ST r (STMap r k v)
 poke k v (STMap m) = STMap <$> STP.poke (encodeKey k) (k /\ v) m
 
+poke_ :: forall r k v. EncodeKey k => k -> v -> STMap r k v -> ST r Unit
+poke_ k v (STMap m) = STP.poke_ (encodeKey k) (k /\ v) m
+
 -- | Remove a key and the corresponding value from a mutable map
 delete :: forall r k v. EncodeKey k => k -> STMap r k v -> ST r (STMap r k v)
 delete k (STMap m) = STMap <$> STP.delete (encodeKey k) m
+
+delete_ :: forall r k v. EncodeKey k => k -> STMap r k v -> ST r Unit
+delete_ k (STMap m) = STP.delete_ (encodeKey k) m
 
 -- | Similar to alter but for mutable maps
 modify :: forall r k v. EncodeKey k => k -> (Maybe v -> Maybe v) -> STMap r k v -> ST r (STMap r k v)

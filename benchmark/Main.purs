@@ -44,18 +44,18 @@ main = do
   bench \_ -> run (do
     m <- STP.new
     foreach t \i -> do
-      void $ STP.poke i i m
-      void $ STP.poke (i+1) i m
-      void $ STP.poke (i+2) i m
+      STP.poke_ i i m
+      STP.poke_ (i+1) i m
+      STP.poke_ (i+2) i m
     pure 1
   )
   log "Js.Map.ST (Int)"
   bench \_ -> run (do
     m <- STM.new
     foreach t \i -> do
-      void $ STM.poke i i m
-      void $ STM.poke (i+1) i m
-      void $ STM.poke (i+2) i m
+      STM.poke_ i i m
+      STM.poke_ (i+1) i m
+      STM.poke_ (i+2) i m
     pure 1
   )
   log "Data.ObjectMap (Int)"
