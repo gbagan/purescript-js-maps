@@ -4,7 +4,7 @@ export const empty = new Map()
 
 export const runST = f => f()
 
-export const _fmapObject = (m0, f) => {
+export const _fmapMap = (m0, f) => {
   const m = {}
   for (let [k, v] of m0)
     m.set(k, f(v))
@@ -27,7 +27,7 @@ export const _foldM = bind => f => mz => m => {
   return acc
 }
 
-export function _foldSCObject(m, z, f, fromMaybe) {
+export const _foldSCMap = (m, z, f, fromMaybe) => {
   let acc = z
   for (let [k, v] of m) {
     const maybeR = f(acc)(k)(v)

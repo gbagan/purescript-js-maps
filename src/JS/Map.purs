@@ -6,7 +6,7 @@ import JS.Map.Internal
   , empty
   , isEmpty
   , size
-  , fromArray
+  , fromFoldable
   , toArray
   , member
   , lookup

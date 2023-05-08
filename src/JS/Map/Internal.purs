@@ -20,8 +20,8 @@ import JS.Map.Primitive as P
 
 newtype Map k v = Map (P.Map String (Tuple k v))
 
-fromArray :: forall k v. EncodeKey k => Array (Tuple k v) -> Map k v
-fromArray xs = xs
+fromFoldable :: forall f k v. EncodeKey k => Functor f => Foldable f => f (Tuple k v) -> Map k v
+fromFoldable xs = xs
   <#> (\kv -> encodeKey (fst kv) /\ kv)
   # P.fromFoldable
   # Map
