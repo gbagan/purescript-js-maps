@@ -7,7 +7,7 @@ and [purescript-object-maps](https://github.com/thought2/purescript-object-maps)
 using Javascript Maps instead of Javascript Objects.
 
 This library contains two objects `Map k v` from `JS.Map` and `JS.Map.Primitive`.
-The latter has better performances that the former but can only be used with Javascript primitive values (Int, String, BigInt) as keys. The former can be used with every key that is an instance of the class `EncodeKey`.
+The latter has better performances that the former but can only be used with Javascript primitive values (`Int`, `String`, `BigInt`) as keys. The former can be used with every key that is an instance of the class `EncodeKey`.
 
 Both objects have efficient lookups but inefficient insertion performance ( O(n) time complexity ).
 However, both objects have a mutable version that can be used via the `ST` monad.
