@@ -42,37 +42,57 @@ Js.Map.Primitive is roughly 8 times faster than Data.ObjectMap on read and writi
 
 
 ```
-** lookup (reading) **
+**  (reading) **
 Js.Map.Primitive (Int)
-mean   = 1.45 ms
-stddev = 466.28 μs
-min    = 1.11 ms
-max    = 10.36 ms
+mean   = 1.38 ms
+stddev = 402.12 μs
+min    = 1.07 ms
+max    = 7.94 ms
 Js.Map (Int)
-mean   = 2.70 ms
-stddev = 598.79 μs
-min    = 2.16 ms
-max    = 16.63 ms
+mean   = 2.76 ms
+stddev = 477.26 μs
+min    = 2.22 ms
+max    = 11.05 ms
 Data.ObjectMap (Int)
-mean   = 10.74 ms
-stddev = 763.09 μs
-min    = 10.07 ms
-max    = 22.42 ms
+mean   = 10.57 ms
+stddev = 523.44 μs
+min    = 9.98 ms
+max    = 22.08 ms
+Data.Map (Int)
+mean   = 8.84 ms
+stddev = 1.22 ms
+min    = 7.91 ms
+max    = 22.84 ms
+Data.HashMap (Int)
+mean   = 3.16 ms
+stddev = 379.74 μs
+min    = 2.60 ms
+max    = 10.01 ms
 
-** poke (writing) **
+** Poke (writing) **
 Js.Map.Primitive.ST (Int)
-mean   = 2.09 ms
-stddev = 584.54 μs
-min    = 1.88 ms
-max    = 9.08 ms
+mean   = 2.13 ms
+stddev = 614.32 μs
+min    = 1.92 ms
+max    = 9.22 ms
 Js.Map.ST (Int)
-mean   = 3.05 ms
-stddev = 1.07 ms
-min    = 2.58 ms
-max    = 15.08 ms
+mean   = 3.08 ms
+stddev = 700.02 μs
+min    = 2.70 ms
+max    = 9.49 ms
 Data.ObjectMap (Int)
-mean   = 15.79 ms
-stddev = 3.93 ms
-min    = 10.95 ms
-max    = 49.13 ms
+mean   = 17.11 ms
+stddev = 4.41 ms
+min    = 11.44 ms
+max    = 45.29 ms
+Data.Map (Int)
+mean   = 27.92 ms
+stddev = 3.78 ms
+min    = 25.16 ms
+max    = 67.87 ms
+Data.HashMap (Int)
+mean   = 8.04 ms
+stddev = 1.32 ms
+min    = 7.36 ms
+max    = 42.20 ms
 ```
