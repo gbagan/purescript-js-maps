@@ -38,7 +38,7 @@ sample = runST do
 
 ### Benchmark
 
-Js.Map.Primitive is roughly 8 times faster than Data.ObjectMap on read and writing using Int.
+Js.Map.Primitive is roughly 8 times faster than Data.ObjectMap on lookup and insertion (via `poke`) using Int (30000 lookups and 30000 insertions).
 
 | Data structure   | Lookup   | Insertion |
 | ---------------- | -------- | --------- |
