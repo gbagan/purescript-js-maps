@@ -1,3 +1,5 @@
+# purescript-js-maps
+
 FFI bindings for Javascript Maps
 
 This is basically a fork of [purescript-foreign-object](https://github.com/purescript/purescript-foreign-object)
@@ -22,7 +24,7 @@ spago install js-maps
 
 ### Example
 
-```
+```haskell
 import JS.Map.Primitive (Map, runST)
 import JS.Map.Primitive.ST as STM
 
@@ -36,7 +38,7 @@ sample = runST do
 
 ### Benchmark
 
-Js.Map.Primitive is roughly 8 times than Data.ObjectMap on read and writing using Int.
+Js.Map.Primitive is roughly 8 times faster than Data.ObjectMap on read and writing using Int.
 
 
 ```
