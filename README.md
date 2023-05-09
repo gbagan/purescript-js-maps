@@ -33,7 +33,7 @@ sample :: Map Int String
 sample = STM.run do
   m <- STM.new
   for 1 10000 \i -> do
-    void $ STM.poke i (show i) m
+    STM.poke_ i (show i) m
   pure m
 ```
 
