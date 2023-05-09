@@ -39,7 +39,7 @@ sample = STM.run do
 
 ### Benchmark
 
-Js.Map.Primitive is roughly faster than other alternatives  on lookup and insertion (via `poke`) using Int (30000 lookups and 30000 insertions).
+Js.Map.Primitive is faster than other alternatives  on lookup and insertion (via `poke`) using Int (30000 lookups and 30000 insertions).
 
 | Data structure   | Lookup   | Insertion |
 | ---------------- | -------- | --------- |
