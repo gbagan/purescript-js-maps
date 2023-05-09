@@ -81,6 +81,13 @@ filterKeys f (Map m) = Map $ P.filter (f <<< fst) m
 filter :: forall k v. EncodeKey k => (v -> Boolean) -> Map k v -> Map k v
 filter f (Map m) = Map $ P.filter (f <<< snd) m
 
+-- | Test whether one map contains all of the keys and values contained in another map
+isSubmap :: forall k v. EncodeKey k => Eq k => Eq v => Eq v => Map k v -> Map k v -> Boolean
+isSubmap (Map m1) (Map m2) = P.isSubmap m1 m2
+
+instance (EncodeKey k, Eq k, Eq v) => Eq (Map k v) where
+  eq (Map m1) (Map m2) = m1 == m2
+
 instance EncodeKey k => Functor (Map k) where
   map f (Map m) = Map $ m <#> \(k /\ v) -> k /\ f v
 
