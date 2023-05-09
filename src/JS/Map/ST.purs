@@ -21,7 +21,6 @@ import Data.Tuple (Tuple, snd)
 import Data.Tuple.Nested ((/\))
 import JS.Map.EncodeKey (class EncodeKey, encodeKey)
 import JS.Map.Internal (Map(..))
-import JS.Map.Primitive as P
 import JS.Map.Primitive.ST as STP
 -- import Foreign.Object.ST.Unsafe as STOU
 import Unsafe.Coerce (unsafeCoerce)
@@ -60,14 +59,14 @@ modify key f m = do
 
 -- | Convert an immutable map into a mutable map
 thaw :: forall r k v. Map k v -> ST r (STMap r k v)
-thaw (Map m) = STMap <$> P.thawST m
+thaw (Map m) = STMap <$> STP.thaw m
 
 run :: forall k v. (forall r. ST r (STMap r k v)) -> Map k v
-run = unsafeCoerce P.runST
+run = unsafeCoerce STP.run
 
 -- | Convert a mutable map into an immutable map
 freeze :: forall r k v. STMap r k v -> ST r (Map k v)
-freeze (STMap m) = Map <$> P.freezeST m
+freeze (STMap m) = Map <$> STP.freeze m
 
 -- | Unsafely get the map out of ST without copying it
 --unsafeFreeze :: forall r k v. STMap r k v -> ST r (Map k v)

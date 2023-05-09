@@ -48,7 +48,7 @@ main = launchAff_ $ runSpec [ consoleReporter ] do
 
   describe "build an object map via ST" do
     it "keeps order" do
-      let m' = P.runST (do
+      let m' = STP.run (do
             m <- STP.new
             _ <- STP.poke 2 3 m
             _ <- STP.poke 3 3 m

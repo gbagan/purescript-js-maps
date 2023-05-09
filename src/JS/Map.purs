@@ -5,6 +5,7 @@ import JS.Map.Internal
   ( Map
   , empty
   , isEmpty
+  , singleton
   , size
   , fromFoldable
   , toArray

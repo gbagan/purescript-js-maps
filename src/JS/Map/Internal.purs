@@ -38,6 +38,9 @@ isEmpty (Map m) = P.isEmpty m
 size :: forall k v. Map k v -> Int
 size (Map m) = P.size m
 
+singleton :: forall k v. EncodeKey k => k -> v -> Map k v
+singleton key val = Map $ P.singleton (encodeKey key) (Tuple key val)
+
 member :: forall k v. EncodeKey k => k -> Map k v -> Boolean
 member key (Map obj) = P.member (encodeKey key) obj
 

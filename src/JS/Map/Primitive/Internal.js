@@ -2,7 +2,7 @@ export const _copyST = m => () => new Map(m)
 
 export const empty = new Map()
 
-export const runST = f => f()
+export const run = f => f()
 
 export const _fmapMap = (m0, f) => {
   const m = {}
@@ -61,3 +61,13 @@ export const toArrayWithKey = f => m => {
 }
 
 export const keys = m => [...m.keys()]
+
+const newImpl = () => new Map()
+
+export { newImpl as new }
+
+export const peekImpl = (m, k, just, nothing) => m.has(k) ? just(m.get(k)) : nothing
+
+export const pokeImpl = (m, k, v) => m.set(k, v)
+
+export const deleteImpl = (m, k) => m.delete(k)
