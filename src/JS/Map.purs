@@ -15,6 +15,9 @@ import JS.Map.Internal
   , alter
   , update
   , delete
+  , filter
+  , filterKeys
+  , filterWithKey
   ) as I
 
 import JS.Map.EncodeKey (class EncodeKey, encodeKey) as I

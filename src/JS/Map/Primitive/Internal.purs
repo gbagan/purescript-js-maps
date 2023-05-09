@@ -20,6 +20,8 @@ import JS.Map.Primitive.Key (class Key)
 
 foreign import data Map :: Type -> Type -> Type
 
+type role Map nominal representational
+
 -- | A reference to a mutable Map
 -- |
 -- | The first type parameter represents the memory region which the map belongs
@@ -29,6 +31,8 @@ foreign import data Map :: Type -> Type -> Type
 -- | The runtime representation of a value of type `STMap r k v` is the same as
 -- | that of `Map k v`, except that mutation is allowed.
 foreign import data STMap :: Region -> Type -> Type -> Type
+
+type role STMap nominal nominal representational
 
 foreign import _copyST :: forall a b r. a -> ST r b
 

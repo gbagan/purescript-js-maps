@@ -66,6 +66,21 @@ update f key (Map obj) = Map $ P.update f' (encodeKey key) obj
   where
   f' v = (key /\ _) <$> f (snd v)
 
+-- | Filter out those key/value pairs of a map for which a predicate
+-- | fails to hold.
+filterWithKey :: forall k v. EncodeKey k => (k -> v -> Boolean) -> Map k v -> Map k v
+filterWithKey f (Map m) = Map $ P.filter (uncurry f) m
+
+-- | Filter out those key/value pairs of a map for which a predicate
+-- | on the key fails to hold.
+filterKeys :: forall k. EncodeKey k => (k -> Boolean) -> (Map k) ~> (Map k)
+filterKeys f (Map m) = Map $ P.filter (f <<< fst) m
+
+-- | Filter out those key/value pairs of a map for which a predicate
+-- | on the value fails to hold.
+filter :: forall k v. EncodeKey k => (v -> Boolean) -> Map k v -> Map k v
+filter f (Map m) = Map $ P.filter (f <<< snd) m
+
 instance EncodeKey k => Functor (Map k) where
   map f (Map m) = Map $ m <#> \(k /\ v) -> k /\ f v
 
