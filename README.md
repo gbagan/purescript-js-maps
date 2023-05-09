@@ -25,11 +25,11 @@ spago install js-maps
 ### Example
 
 ```haskell
-import JS.Map.Primitive (Map, runST)
+import JS.Map.Primitive (Map)
 import JS.Map.Primitive.ST as STM
 
 sample :: ObjectMap Int String
-sample = runST do
+sample = STM.run do
   m <- STM.new
   foreach (1..10000) \n -> do
     void $ STM.poke i (show i) m
