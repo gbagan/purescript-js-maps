@@ -10,7 +10,7 @@ This library contains two objects `Map k v` from `JS.Map` and `JS.Map.Primitive`
 The latter has better performances that the former but can only be used with Javascript primitive values (`Int`, `String`, `BigInt`) as keys. The former can be used with every key that is an instance of the class `EncodeKey`.
 
 Both objects have efficient lookups but inefficient insertion performance ( O(n) time complexity ).
-However, both objects have a mutable version that can be used via the `ST` monad. In this case, insertions (via `poke`) are also efficient.
+However, both objects have a mutable version `STMap` that can be used via the `ST` monad. In this case, insertions (via `poke`) are also efficient.
 
 ### Documentation
 
@@ -25,20 +25,21 @@ spago install js-maps
 ### Example
 
 ```haskell
-import JS.Map.Primitive (Map, runST)
+import Control.Monad.ST (for)
+import JS.Map.Primitive (Map)
 import JS.Map.Primitive.ST as STM
 
-sample :: ObjectMap Int String
-sample = runST do
+sample :: Map Int String
+sample = STM.run do
   m <- STM.new
-  foreach (1..10000) \n -> do
-    void $ STM.poke i (show i) m
+  for 1 10000 \i -> do
+    STM.poke_ i (show i) m
   pure m
 ```
 
 ### Benchmark
 
-Js.Map.Primitive is roughly 8 times faster than Data.ObjectMap on lookup and insertion (via `poke`) using Int (30000 lookups and 30000 insertions).
+Js.Map.Primitive is roughly faster than other alternatives  on lookup and insertion (via `poke`) using Int (30000 lookups and 30000 insertions).
 
 | Data structure   | Lookup   | Insertion |
 | ---------------- | -------- | --------- |
