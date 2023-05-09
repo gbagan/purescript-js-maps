@@ -25,20 +25,21 @@ spago install js-maps
 ### Example
 
 ```haskell
+import Control.Monad.ST (for)
 import JS.Map.Primitive (Map)
 import JS.Map.Primitive.ST as STM
 
-sample :: ObjectMap Int String
+sample :: Map Int String
 sample = STM.run do
   m <- STM.new
-  foreach (1..10000) \n -> do
+  for 1 10000 \i -> do
     void $ STM.poke i (show i) m
   pure m
 ```
 
 ### Benchmark
 
-Js.Map.Primitive is roughly 8 times faster than Data.ObjectMap on lookup and insertion (via `poke`) using Int (30000 lookups and 30000 insertions).
+Js.Map.Primitive is roughly faster than other alternatives  on lookup and insertion (via `poke`) using Int (30000 lookups and 30000 insertions).
 
 | Data structure   | Lookup   | Insertion |
 | ---------------- | -------- | --------- |
