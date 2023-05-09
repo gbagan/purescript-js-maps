@@ -16,6 +16,7 @@ to generate this file without the comments in this block.
   , "either"
   , "foldable-traversable"
   , "functions"
+  , "js-bigints"
   , "maybe"
   , "prelude"
   , "profunctor-lenses"
