@@ -3,8 +3,8 @@ module JS.Map.Internal where
 import Prelude
 
 import Data.Either (Either(..))
-import Data.Foldable (class Foldable, foldl, foldr, foldMap)
-import Data.FoldableWithIndex (class FoldableWithIndex)
+import Data.Foldable (class Foldable, foldl, foldr, foldMap, intercalate)
+import Data.FoldableWithIndex (class FoldableWithIndex, foldMapWithIndex)
 import Data.FunctorWithIndex (class FunctorWithIndex)
 import Data.Lens (lens)
 import Data.Lens.AffineTraversal (affineTraversal)
@@ -84,6 +84,12 @@ filter f (Map m) = Map $ P.filter (f <<< snd) m
 -- | Test whether one map contains all of the keys and values contained in another map
 isSubmap :: forall k v. EncodeKey k => Eq k => Eq v => Eq v => Map k v -> Map k v -> Boolean
 isSubmap (Map m1) (Map m2) = P.isSubmap m1 m2
+
+instance showMap :: (EncodeKey k, Show k, Show v) => Show (Map k v) where
+  show :: Map k v -> String
+  show m = "[" <> (intercalate ", " $ foldMapWithIndex showPair m) <> "]"
+    where
+      showPair k v = ["[" <> show k <> ", " <> show v <> "]"]
 
 instance (EncodeKey k, Eq k, Eq v) => Eq (Map k v) where
   eq (Map m1) (Map m2) = m1 == m2
