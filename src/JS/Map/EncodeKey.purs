@@ -14,7 +14,7 @@ instance EncodeKey Int where
   encodeKey = show
 
 instance EncodeKey String where
-  encodeKey = show
+  encodeKey s = s
 
 instance (EncodeKey a, EncodeKey b) => EncodeKey (Tuple a b) where
   encodeKey (Tuple a b) = "(" <> encodeKey a <> "," <> encodeKey b <> ")"
