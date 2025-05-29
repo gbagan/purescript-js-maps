@@ -228,8 +228,7 @@ toArray = toArrayWithKey Tuple
 foreign import keys :: forall k v. Map k v -> Array k
 
 -- | Get a list of the values in a map
-values :: forall k v. Map k v -> Array v
-values = toArrayWithKey (\_ v -> v)
+foreign import values :: forall k v. Map k v -> Array v
 
 -- | Compute the union of two maps, preferring the first map in the case of
 -- | duplicate keys.

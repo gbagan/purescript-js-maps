@@ -61,6 +61,7 @@ export const toArrayWithKey = f => m => {
 }
 
 export const keys = m => [...m.keys()]
+export const values = m => [...m.values()]
 
 const newImpl = () => new Map()
 

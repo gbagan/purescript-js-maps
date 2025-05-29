@@ -38,6 +38,12 @@ isEmpty (Map m) = P.isEmpty m
 size :: forall k v. Map k v -> Int
 size (Map m) = P.size m
 
+keys :: forall k v. Map k v -> Array k
+keys (Map m) = map fst (P.values m)
+
+values :: forall k v. Map k v -> Array v
+values (Map m) = map snd (P.values m)
+
 singleton :: forall k v. EncodeKey k => k -> v -> Map k v
 singleton key val = Map $ P.singleton (encodeKey key) (Tuple key val)
 

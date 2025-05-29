@@ -18,6 +18,8 @@ import JS.Map.Internal
   , filter
   , filterKeys
   , filterWithKey
+  , keys
+  , values
   ) as I
 
 import JS.Map.EncodeKey (class EncodeKey, encodeKey) as I
