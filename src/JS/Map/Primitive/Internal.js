@@ -13,7 +13,7 @@ export const _fmapMap = (m0, f) => {
 
 export function _mapWithKey(m0, f) {
   const m = new Map()
-  for (const [k, v] of m0) 
+  for (const [k, v] of m0)
     m.set(k, f(k)(v))
   return m
 }
@@ -40,8 +40,8 @@ export const _foldSCMap = (m, z, f, fromMaybe) => {
 }
 
 export const _all = f => m => {
-  for (var k in m) {
-    if (!f(k)(m.get(k))) return false
+  for (let [k, v] of m) {
+    if (!f(k)(v)) return false
   }
   return true
 }
