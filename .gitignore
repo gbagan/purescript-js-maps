@@ -11,3 +11,4 @@
 /.spago
 /index.js
 /package-lock.json
+/spago.lock
